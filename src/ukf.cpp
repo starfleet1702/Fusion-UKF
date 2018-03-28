@@ -21,8 +21,8 @@ UKF::UKF() {
   // initial state vector
   x_ = VectorXd(5);
 
-  // initial covariance matrix
-  P_ = MatrixXd(5, 5);
+  // initial covariance matrix - using identity matrix as initial value
+  P_ = MatrixXd::Identity(5, 5);
 
   // Process noise standard deviation longitudinal acceleration in m/s^2
   std_a_ = 30;
@@ -48,12 +48,16 @@ UKF::UKF() {
   //DO NOT MODIFY measurement noise values above these are provided by the sensor manufacturer.
   
   /**
-  TODO:
-
   Complete the initialization. See ukf.h for other member properties.
 
   Hint: one or more values initialized above might be wildly off...
   */
+  n_x_ = 5;
+  n_aug_ = 7;
+  lambda_ = 3-n_aug_;
+
+  
+
 }
 
 UKF::~UKF() {}
