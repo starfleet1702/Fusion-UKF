@@ -23,21 +23,25 @@ public:
   bool use_radar_;
 
   ///* state vector: [pos1 pos2 vel_abs yaw_angle yaw_rate] in SI units and rad
+  //TODO : initialize during update
   VectorXd x_;
 
   ///* state covariance matrix
   MatrixXd P_;
 
   ///* predicted sigma points matrix
+  //TODO : To Calculate
   MatrixXd Xsig_pred_;
 
   ///* time when the state is true, in us
   long long time_us_;
 
   ///* Process noise standard deviation longitudinal acceleration in m/s^2
+  //TODO : To Tune
   double std_a_;
 
   ///* Process noise standard deviation yaw acceleration in rad/s^2
+  //TODO : To Tune
   double std_yawdd_;
 
   ///* Laser measurement noise standard deviation position1 in m
@@ -67,6 +71,10 @@ public:
   ///* Sigma point spreading parameter
   double lambda_;
 
+  MatrixXd xSig;
+  
+  ///* Number of Sigma Points
+  int n_sigma;
 
   /**
    * Constructor
@@ -102,6 +110,12 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+  
+  void GenerateSigmaPoints();
+  
+  void predictSigmaPoints();
+  
+  
 };
 
 #endif /* UKF_H */

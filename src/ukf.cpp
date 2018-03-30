@@ -12,6 +12,29 @@ using std::vector;
  * This is scaffolding, do not modify
  */
 UKF::UKF() {
+	
+	/**
+  Complete the initialization. See ukf.h for other member properties.
+
+  Hint: one or more values initialized above might be wildly off...
+  */
+  // Dimensionality of x_
+  n_x_ = 5;
+  
+  // Dimensionality of augmented x_
+  n_aug_ = 7;
+  
+  // lambda : Spreadness from mean for sigma points
+  lambda_ = 3-n_aug_;
+  
+  // Number of Sigma Points
+  n_sigma = 2*n_aug+1;
+  
+  // Matrix to store Sigma points
+  MatrixXd xSig(n_aug,n_sigma);
+  
+  
+	
   // if this is false, laser measurements will be ignored (except during init)
   use_laser_ = true;
 
@@ -19,10 +42,11 @@ UKF::UKF() {
   use_radar_ = true;
 
   // initial state vector
-  x_ = VectorXd(5);
+  //x_ = []
+  x_ = VectorXd(n_x_);
 
   // initial covariance matrix - using identity matrix as initial value
-  P_ = MatrixXd::Identity(5, 5);
+  P_ = MatrixXd::Identity(n_x_ ,n_x_);
 
   // Process noise standard deviation longitudinal acceleration in m/s^2
   std_a_ = 30;
@@ -47,15 +71,7 @@ UKF::UKF() {
   std_radrd_ = 0.3;
   //DO NOT MODIFY measurement noise values above these are provided by the sensor manufacturer.
   
-  /**
-  Complete the initialization. See ukf.h for other member properties.
-
-  Hint: one or more values initialized above might be wildly off...
-  */
-  n_x_ = 5;
-  n_aug_ = 7;
-  lambda_ = 3-n_aug_;
-
+  
   
 
 }
@@ -73,6 +89,8 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   Complete this function! Make sure you switch between lidar and radar
   measurements.
   */
+  
+  
 }
 
 /**
@@ -117,4 +135,16 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
 
   You'll also need to calculate the radar NIS.
   */
+}
+
+void UKF::GenerateSigmaPoints(){
+	//First Sigma point will be mean itself
+	this.xSig.col(0) = this.x_;
+	MatrixXd P_aug();
+	//Computing the square root of P
+	MatrixXd A = P.llt().matrixL();
+	
+	fo
+	
+	
 }
