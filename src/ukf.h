@@ -31,7 +31,7 @@ public:
 
   ///* predicted sigma points matrix
   //TODO : To Calculate
-  MatrixXd Xsig_pred_;
+  MatrixXd xSig_pred_;
 
   ///* time when the state is true, in us
   long long time_us_;
@@ -74,7 +74,20 @@ public:
   MatrixXd xSig;
   
   ///* Number of Sigma Points
-  int n_sigma;
+  int n_sigma_;
+  
+  int n_z_radar_;
+  
+  int n_z_lidar_;
+  
+  // Defining Weights
+  VectorXd weights;
+	
+  //the current NIS for radar
+  double NIS_radar_;
+
+  //the current NIS for laser
+  double NIS_laser_;
 
   /**
    * Constructor
@@ -113,8 +126,13 @@ public:
   
   void GenerateSigmaPoints();
   
-  void predictSigmaPoints();
+  void predictSigmaPoints(double delta_t);
   
+  void predictMeanAndCovariance();
+  
+  MatrixXd predictSigmaPointsInMeasurementSpace();
+  
+  void initWeights();
   
 };
 
